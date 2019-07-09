@@ -74,7 +74,7 @@ PACKAGE_NAME_PATTERN=${PACKAGE_NAME_PATTERN:-"webrtc"}
 PACKAGE_VERSION_PATTERN=${PACKAGE_VERSION_PATTERN:-"%rn%"}
 REPO_URL="https://chromium.googlesource.com/external/webrtc"
 #DEPOT_TOOLS_URL="https://chromium.googlesource.com/chromium/tools/depot_tools.git"
-#DEPOT_TOOLS_DIR=$DIR/depot_tools
+DEPOT_TOOLS_DIR=$DIR/depot_tools
 TOOLS_DIR=$DIR/tools
 PATH=python276_bin:$PATH
 
@@ -89,6 +89,8 @@ then
     echo "FATAL: $DEPOT_TOOLS_DIR does not exist..."
     exit -1
 fi
+
+export PATH=$PATH:$DEPOT_TOOLS_DIR
 
 echo "ENABLE_BITCODE = ${ENABLE_BITCODE}"
 

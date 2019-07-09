@@ -13,6 +13,10 @@ installed.
 * **Linux**: Debian or Ubuntu flavour with `apt-get` available. Build for 'linux' and 'android'.
 
 ## Usage
+First you need to install depot_tools:
+```
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+```
 
 To build the latest version of WebRTC just type:
 
@@ -62,6 +66,16 @@ Once you have compiled the libraries you can run a quick compile test to ensure 
 
 ```
 ./test/run_tests.sh out/webrtc-17657-02ba69d-linux-x64
+```
+
+## Copy and uploading to s3
+For s3 we need only libwebrtc_full.a, so next steps are:
+```
+mkdir -p ./build/Debug ./build/Release
+cp ./out/{platform}/src/out/{arch}/Debug/libwebrtc_full.a ./build/Debug
+cp ./out/{platform}/src/out/{arch}/Release/libwebrtc_full.a ./build/Release
+
+aws s3 sync ./build/ s3://{bucket_name}
 ```
 
 ## Further reading
